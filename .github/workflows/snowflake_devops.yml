@@ -18,8 +18,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
-        uses: actions/checkout@v2
-
+        uses: actions/checkout@v3
+        
+      - name: Debug SF_ACCOUNT
+        run: echo "SF_ACCOUNT is set to:$SF_ACCOUNT"
+        
       - name: Use Python 3.8.x
         uses: actions/setup-python@v2.2.1
         with:
@@ -33,8 +36,6 @@ jobs:
           SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
           SF_DATABASE: ${{ secrets.SF_DATABASE }}
           SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
-          name: Debug SF_ACCOUNT
-          run: echo "SF_ACCOUNT is set to:$SF_ACCOUNT"
         run: |
           echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           python --version
